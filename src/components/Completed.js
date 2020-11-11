@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Todo } from "../Todo";
-import { propEq, compose, filter, not } from "ramda";
+import { propEq, filter } from "ramda";
 
 function Completed({ toggleComplated, removeTodo }) {
   const todos = useContext(Todo);
-  const completedTodos = filter(compose(not, propEq("completed", false)), todos);
+  const completedTodos = filter(propEq("completed", true), todos);
  
   return (
     <div>
