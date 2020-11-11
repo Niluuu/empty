@@ -1,19 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Todo } from "../Todo";
 import { propEq, compose, filter, not } from "ramda";
 
 function Completed({ toggleComplated, removeTodo }) {
-  const [completed, setCompleted] = useState([]);
   const todos = useContext(Todo);
-
-  useEffect(() => {
-    const filtered = filter(compose(not, propEq("completed", false)), todos);
-    setCompleted(filtered);
-  }, [todos]);
-
+  const completedTodos = filter(compose(not, propEq("completed", false)), todos);
+ 
   return (
     <div>
-      {completed.map(({ text, id, completed }) => (
+      {completedTodos.map(({ text, id, completed }) => (
         <div style={{ display: "flex", alignItems: "center" }} key={id}>
           <p>{text}</p>
           <button onClick={() => toggleComplated(id)}>
